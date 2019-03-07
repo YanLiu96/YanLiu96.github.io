@@ -1,12 +1,12 @@
 # Basic
-title: Robotkang
-subtitle: 自留地
-description: 欢迎来到我的个人网站~
+title: 小小小小小小菜鸡
+subtitle: 看就完事了
+description: 欢迎来到我的博客，闲的蛋疼可能会发布点东西
 # 头像里面的标题
-avatarTitle: RobotKang
+avatarTitle: Yan Liu
 # 头像里面的描述
-avatarDesc: 机器人赛事/嵌入式
-url: "http://robotkang.cc"
+avatarDesc: Java/Python/JS
+url: "https://yanliu96.github.io./"
 
 # Comment
 comment:
@@ -16,17 +16,17 @@ comment:
 
 # Social
 social:
-    weibo: 123456789
-    weixing: kang1390305137 
-    github: MengZheK
+    weibo: 5704357721
+    weixing: LY278899085 
+    github: YanLiu96
     # twitter: 
-    mail: robotkang@foxmail.com
-    csdn: robotkang
+    mail: 278899085@qq.com
+    csdn: null
 
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 
-baidu:
-    id: 144d500dd9ac4a65465a14b95f3e4ade 
+#baidu:
+#    id: 144d500dd9ac4a65465a14b95f3e4ade 
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
@@ -36,11 +36,6 @@ baidu:
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
-#
-#
-#  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/MengZheK/kangblog.github.io
-#
 #
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
 
@@ -62,7 +57,7 @@ cover_color:
 
 # The blog button should not be removed.
 blog_button:
-    title: 博客主页
+    title: 主页
 
 # Navigation buttons in the front page.s
 nav:
