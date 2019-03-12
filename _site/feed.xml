@@ -5,9 +5,148 @@
     <description>欢迎来到我的博客，闲的蛋疼可能会发布点东西</description>
     <link>https://yanliu96.github.io.//</link>
     <atom:link href="https://yanliu96.github.io.//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Mar 2019 22:31:57 +0000</pubDate>
-    <lastBuildDate>Thu, 07 Mar 2019 22:31:57 +0000</lastBuildDate>
+    <pubDate>Fri, 08 Mar 2019 20:23:57 +0000</pubDate>
+    <lastBuildDate>Fri, 08 Mar 2019 20:23:57 +0000</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Python实现邮件发送（1）必备工具</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;这个博客网站，是我扒别人的框架，正在修改中，有的功能不对，你们要小心点。&lt;/h2&gt;
+&lt;p&gt;### 必备工具&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com&quot; target=&quot;_blank&quot;&gt; Amazon aws account&lt;/a&gt; AWS 中有个叫Amazon Simple Email Service，可以提供SMTP服务，达到第三方发送邮件的功能。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;两个邮箱，一个用来发送，一个用来接收。在后续步骤中，将不再需要接收邮箱。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;操作流程&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;前往AWS官网注册开发者账号&lt;a href=&quot;https://aws.amazon.com/cn/console/&quot; target=&quot;_blank&quot;&gt; 点我点我&lt;/a&gt; 在网页右上角(正常人都会注册吧。。)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;注册完毕后登录，在AWS管理控制台中，查找服务中搜索Simple Email Service. 点击它进入如下所示页面。
+&lt;img src=&quot;https://thumbnail0.baidupcs.com/thumbnail/d25702ca2b071143767d5fa7e8e6e86f?fid=3814439407-250528-710279725894132&amp;amp;time=1551999600&amp;amp;rt=sh&amp;amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-nCmt8pTHxOl%2B4aWbhOX2YK5Supo%3D&amp;amp;expires=8h&amp;amp;chkv=0&amp;amp;chkbd=0&amp;amp;chkpc=&amp;amp;dp-logid=1537752308737442010&amp;amp;dp-callid=0&amp;amp;size=c710_u400&amp;amp;quality=100&amp;amp;vuk=-&amp;amp;ft=video&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;点击左侧 Email Addresses，然后Verify a New Email Address.将准备的两个邮箱分别验证，它会发送验证邮件到邮箱，点击即可完成验证。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;点击左侧 SMTP Settings, 然后点击Create My SMTP Credentials. 记住IAM User Name,点击右下角的创建按钮。你将会得到SMTP安全凭证。如下所示
+&lt;img src=&quot;https://thumbnail0.baidupcs.com/thumbnail/496c7c526611381124503ee7afe41a32?fid=3814439407-250528-811944213079580&amp;amp;time=1551999600&amp;amp;rt=sh&amp;amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-rP%2FkKttUggu9V51KAmvp1rrt%2B7s%3D&amp;amp;expires=8h&amp;amp;chkv=0&amp;amp;chkbd=0&amp;amp;chkpc=&amp;amp;dp-logid=1537909891612900101&amp;amp;dp-callid=0&amp;amp;size=c710_u400&amp;amp;quality=100&amp;amp;vuk=-&amp;amp;ft=video&quot; /&gt;
+至此为止，aws 已经允许你使用它的服务来发送邮件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;接下来就是如何使用Python代码来发送邮件了。官网给出了各种编程语言的最佳代码示例。&lt;a href=&quot;https://docs.aws.amazon.com/zh_cn/ses/latest/DeveloperGuide/examples-send-using-smtp.html&quot; target=&quot;_blank&quot;&gt; Example&lt;/a&gt; 
+这里我主要介绍Python。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;```
+import smtplib&lt;br /&gt;
+import email.utils
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText&lt;/p&gt;
+
+&lt;h1 id=&quot;replace-senderexamplecom-with-your-from-address&quot;&gt;Replace sender@example.com with your “From” address.&lt;/h1&gt;
+&lt;p&gt;# This address must be verified.
+SENDER = ‘sender@example.com’&lt;br /&gt;
+SENDERNAME = ‘Sender Name’&lt;/p&gt;
+
+&lt;h1 id=&quot;replace-recipientexamplecom-with-a-to-address-if-your-account&quot;&gt;Replace recipient@example.com with a “To” address. If your account&lt;/h1&gt;
+&lt;p&gt;# is still in the sandbox, this address must be verified.
+RECIPIENT  = ‘recipient@example.com’&lt;/p&gt;
+
+&lt;h1 id=&quot;replace-smtpusername-with-your-amazon-ses-smtp-user-name&quot;&gt;Replace smtp_username with your Amazon SES SMTP user name.&lt;/h1&gt;
+&lt;p&gt;USERNAME_SMTP = “smtp_username”&lt;/p&gt;
+
+&lt;h1 id=&quot;replace-smtppassword-with-your-amazon-ses-smtp-password&quot;&gt;Replace smtp_password with your Amazon SES SMTP password.&lt;/h1&gt;
+&lt;p&gt;PASSWORD_SMTP = “smtp_password”&lt;/p&gt;
+
+&lt;h1 id=&quot;optional-the-name-of-a-configuration-set-to-use-for-this-message&quot;&gt;(Optional) the name of a configuration set to use for this message.&lt;/h1&gt;
+&lt;p&gt;# If you comment out this line, you also need to remove or comment out
+# the “X-SES-CONFIGURATION-SET:” header below.
+CONFIGURATION_SET = “ConfigSet”&lt;/p&gt;
+
+&lt;h1 id=&quot;if-youre-using-amazon-ses-in-an-aws-region-other-than-&quot;&gt;If you’re using Amazon SES in an AWS Region other than 美国西部（俄勒冈）,&lt;/h1&gt;
+&lt;p&gt;# replace email-smtp.us-west-2.amazonaws.com with the Amazon SES SMTP&lt;br /&gt;
+# endpoint in the appropriate region.
+HOST = “email-smtp.us-west-2.amazonaws.com”
+PORT = 587&lt;/p&gt;
+
+&lt;h1 id=&quot;the-subject-line-of-the-email&quot;&gt;The subject line of the email.&lt;/h1&gt;
+&lt;p&gt;SUBJECT = ‘Amazon SES Test (Python smtplib)’&lt;/p&gt;
+
+&lt;h1 id=&quot;the-email-body-for-recipients-with-non-html-email-clients&quot;&gt;The email body for recipients with non-HTML email clients.&lt;/h1&gt;
+&lt;p&gt;BODY_TEXT = (“Amazon SES Test\r\n”
+             “This email was sent through the Amazon SES SMTP “
+             “Interface using the Python smtplib package.”
+            )&lt;/p&gt;
+
+&lt;h1 id=&quot;the-html-body-of-the-email&quot;&gt;The HTML body of the email.&lt;/h1&gt;
+&lt;p&gt;BODY_HTML = “”“&amp;lt;html&amp;gt;&lt;/p&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Amazon SES SMTP Email Test&lt;/h1&gt;
+  &lt;p&gt;This email was sent with Amazon SES using the
+    &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;
+    &lt;a href=&quot;https://docs.python.org/3/library/smtplib.html&quot;&gt;
+    smtplib&lt;/a&gt; library.&lt;/p&gt;
+&lt;/body&gt;
+&lt;p&gt;&amp;lt;/html&amp;gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;create-message-container---the-correct-mime-type-is-multipartalternative&quot;&gt;Create message container - the correct MIME type is multipart/alternative.&lt;/h1&gt;
+&lt;p&gt;msg = MIMEMultipart(‘alternative’)
+msg[‘Subject’] = SUBJECT
+msg[‘From’] = email.utils.formataddr((SENDERNAME, SENDER))
+msg[‘To’] = RECIPIENT
+# Comment or delete the next line if you are not using a configuration set
+msg.add_header(‘X-SES-CONFIGURATION-SET’,CONFIGURATION_SET)&lt;/p&gt;
+
+&lt;h1 id=&quot;record-the-mime-types-of-both-parts---textplain-and-texthtml&quot;&gt;Record the MIME types of both parts - text/plain and text/html.&lt;/h1&gt;
+&lt;p&gt;part1 = MIMEText(BODY_TEXT, ‘plain’)
+part2 = MIMEText(BODY_HTML, ‘html’)&lt;/p&gt;
+
+&lt;h1 id=&quot;attach-parts-into-message-container&quot;&gt;Attach parts into message container.&lt;/h1&gt;
+&lt;p&gt;# According to RFC 2046, the last part of a multipart message, in this case
+# the HTML message, is best and preferred.
+msg.attach(part1)
+msg.attach(part2)&lt;/p&gt;
+
+&lt;h1 id=&quot;try-to-send-the-message&quot;&gt;Try to send the message.&lt;/h1&gt;
+&lt;p&gt;try:&lt;br /&gt;
+    server = smtplib.SMTP(HOST, PORT)
+    server.ehlo()
+    server.starttls()
+    #stmplib docs recommend calling ehlo() before &amp;amp; after starttls()
+    server.ehlo()
+    server.login(USERNAME_SMTP, PASSWORD_SMTP)
+    server.sendmail(SENDER, RECIPIENT, msg.as_string())
+    server.close()
+# Display an error message if something goes wrong.
+except Exception as e:
+    print (“Error: “, e)
+else:
+    print (“Email sent!”)
+```&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Emmm,下个博客在介绍具体意思吧（很久很久以后。。），反正也不难你们自己能看懂。下个博客我会介绍怎么写HTML email（就是花里胡哨的），如何不需要验证就可以发送给别人邮件，如何用在项目里（比如，用户注册发送notification 邮件。但是我最近很忙，这篇纯属是练手，毕竟github io创建了不能空白，所以我可能鸽了你们。
+&lt;img src=&quot;https://thumbnail0.baidupcs.com/thumbnail/f7cce889ba869efb1075bbeb44819a23?fid=3814439407-250528-746790277804376&amp;amp;time=1551999600&amp;amp;rt=sh&amp;amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-FDrjpE%2BYxUd856lRdpmmGTPDjYE%3D&amp;amp;expires=8h&amp;amp;chkv=0&amp;amp;chkbd=0&amp;amp;chkpc=&amp;amp;dp-logid=1538147041156373817&amp;amp;dp-callid=0&amp;amp;size=c710_u400&amp;amp;quality=100&amp;amp;vuk=-&amp;amp;ft=video&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+        <link>https://yanliu96.github.io.//2019/03/Python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81(1)/</link>
+        <guid isPermaLink="true">https://yanliu96.github.io.//2019/03/Python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81(1)/</guid>
+        
+        <category>博客</category>
+        
+        
+      </item>
     
   </channel>
 </rss>
