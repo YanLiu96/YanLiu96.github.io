@@ -5,9 +5,23 @@
     <description>欢迎来到我的博客，闲的蛋疼可能会发布点东西</description>
     <link>https://yanliu96.github.io.//</link>
     <atom:link href="https://yanliu96.github.io.//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Mar 2019 20:23:57 +0000</pubDate>
-    <lastBuildDate>Fri, 08 Mar 2019 20:23:57 +0000</lastBuildDate>
+    <pubDate>Fri, 21 Jun 2019 20:40:41 +0800</pubDate>
+    <lastBuildDate>Fri, 21 Jun 2019 20:40:41 +0800</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Linux common operation</title>
+        <description>&lt;h1 id=&quot;linux&quot;&gt;Linux&lt;/h1&gt;
+&lt;p&gt;## Create folder&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
+        <link>https://yanliu96.github.io.//2019/03/Linux-Operation/</link>
+        <guid isPermaLink="true">https://yanliu96.github.io.//2019/03/Linux-Operation/</guid>
+        
+        <category>博客</category>
+        
+        
+      </item>
     
       <item>
         <title>Python实现邮件发送（1）必备工具</title>
@@ -139,7 +153,7 @@ else:
 &lt;img src=&quot;https://thumbnail0.baidupcs.com/thumbnail/f7cce889ba869efb1075bbeb44819a23?fid=3814439407-250528-746790277804376&amp;amp;time=1551999600&amp;amp;rt=sh&amp;amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-FDrjpE%2BYxUd856lRdpmmGTPDjYE%3D&amp;amp;expires=8h&amp;amp;chkv=0&amp;amp;chkbd=0&amp;amp;chkpc=&amp;amp;dp-logid=1538147041156373817&amp;amp;dp-callid=0&amp;amp;size=c710_u400&amp;amp;quality=100&amp;amp;vuk=-&amp;amp;ft=video&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
         <link>https://yanliu96.github.io.//2019/03/Python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81(1)/</link>
         <guid isPermaLink="true">https://yanliu96.github.io.//2019/03/Python%E5%AE%9E%E7%8E%B0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81(1)/</guid>
         
